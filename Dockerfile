@@ -28,8 +28,9 @@ COPY . .
 # Install dependencies and optimize
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# Setup directory permissions
-RUN chmod -R 775 storage bootstrap/cache && \
+# Ensure Laravel storage directories exist and set permissions
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views && \
+    chmod -R 775 storage bootstrap/cache && \
     chown -R www-data:www-data /var/www/html
 
 # Expose port
