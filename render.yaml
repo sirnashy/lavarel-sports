@@ -1,0 +1,53 @@
+services:
+  # Web Service
+  - type: web
+    name: sportstream-web
+    env: php
+    buildCommand: composer install --no-interaction --optimize-autoloader --no-dev && php artisan optimize
+    startCommand: apache2-foreground
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: mysql
+      - key: CACHE_STORE
+        value: redis
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: redis
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sportstream-redis
+          property: connectionString
+
+  # Queue Background Worker
+  - type: worker
+    name: sportstream-queue
+    env: php
+    buildCommand: composer install --no-interaction --optimize-autoloader --no-dev
+    startCommand: php artisan queue:work --verbose --tries=3 --timeout=90
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DB_CONNECTION
+        value: mysql
+      - key: CACHE_STORE
+        value: redis
+      - key: QUEUE_CONNECTION
+        value: redis
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sportstream-redis
+          property: connectionString
+
+  # Redis Cache & Queue Store
+  - type: redis
+    name: sportstream-redis
+    ipAllowList: [] # Only accessible by services within the same group

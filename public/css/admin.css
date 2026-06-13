@@ -1,0 +1,210 @@
+/* =========================================================
+   SportStream Admin — Stylesheet
+   ========================================================= */
+
+:root {
+  --adm-sidebar-w: 260px;
+  --adm-bg:        #0d1117;
+  --adm-bg-2:      #161b22;
+  --adm-surface:   #21262d;
+  --adm-border:    #30363d;
+  --adm-text:      #e6edf3;
+  --adm-muted:     #6e7681;
+  --adm-primary:   #1f6feb;
+  --adm-danger:    #f85149;
+  --adm-success:   #3fb950;
+  --adm-warning:   #d29922;
+  --adm-purple:    #a371f7;
+  --transition:    all .2s ease;
+  --font:          'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body.admin-body {
+  font-family: var(--font);
+  background: var(--adm-bg);
+  color: var(--adm-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Layout ──────────────────────────────────────────────── */
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.admin-sidebar {
+  width: var(--adm-sidebar-w);
+  min-height: 100vh;
+  background: var(--adm-bg-2);
+  border-right: 1px solid var(--adm-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  transition: var(--transition);
+  overflow-y: auto;
+}
+.admin-sidebar.collapsed { transform: translateX(-100%); }
+
+.sidebar-header {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--adm-border);
+}
+.sidebar-brand {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 1.2rem; font-weight: 800; color: var(--adm-text);
+  text-decoration: none;
+}
+.sidebar-brand:hover { color: var(--adm-primary); }
+.brand-icon { font-size: 1.4rem; }
+
+.sidebar-nav { flex: 1; padding: 1rem 0.75rem; }
+.nav-section { margin-bottom: 1.5rem; }
+.nav-label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--adm-muted);
+  padding: 0 0.5rem; margin-bottom: 0.4rem; display: block;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  color: var(--adm-text);
+  text-decoration: none;
+  font-size: 0.9rem; font-weight: 500;
+  transition: var(--transition);
+  margin-bottom: 2px;
+}
+.nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+.nav-item.active {
+  background: rgba(31,111,235,0.2);
+  color: #58a6ff;
+  border-left: 2px solid var(--adm-primary);
+}
+.nav-item i { width: 16px; text-align: center; flex-shrink: 0; }
+
+.sidebar-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--adm-border);
+}
+.sidebar-user {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.88rem;
+}
+.sidebar-user i { font-size: 1.5rem; color: var(--adm-muted); }
+.user-name { font-weight: 600; }
+
+/* ── Main ────────────────────────────────────────────────── */
+.admin-main {
+  margin-left: var(--adm-sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-topbar {
+  background: var(--adm-bg-2);
+  border-bottom: 1px solid var(--adm-border);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky; top: 0; z-index: 90;
+}
+.sidebar-toggle {
+  background: none; border: none; color: var(--adm-text);
+  font-size: 1.4rem; cursor: pointer; padding: 0.25rem;
+  border-radius: 6px; transition: var(--transition);
+}
+.sidebar-toggle:hover { background: rgba(255,255,255,0.05); }
+.page-title { font-size: 1.1rem; font-weight: 600; }
+
+.admin-content { flex: 1; }
+
+/* ── Cards ───────────────────────────────────────────────── */
+.admin-card {
+  background: var(--adm-bg-2);
+  border: 1px solid var(--adm-border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.admin-card__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--adm-border);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.admin-card__header h5 { margin: 0; font-size: 0.95rem; font-weight: 600; }
+.admin-card__body { padding: 1.25rem; }
+.admin-card__footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--adm-border);
+  background: rgba(0,0,0,0.1);
+}
+
+/* ── Stat Cards ──────────────────────────────────────────── */
+.stat-card {
+  background: var(--adm-bg-2);
+  border: 1px solid var(--adm-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex; align-items: center; gap: 1rem;
+  transition: var(--transition);
+}
+.stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.stat-icon {
+  width: 52px; height: 52px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+}
+.stat-card--blue .stat-icon { background: rgba(31,111,235,0.2); color: #58a6ff; }
+.stat-card--red .stat-icon { background: rgba(248,81,73,0.2); color: var(--adm-danger); }
+.stat-card--green .stat-icon { background: rgba(63,185,80,0.2); color: var(--adm-success); }
+.stat-card--purple .stat-icon { background: rgba(163,113,247,0.2); color: var(--adm-purple); }
+.stat-value { font-size: 1.8rem; font-weight: 800; line-height: 1; color: white; }
+.stat-label { font-size: 0.85rem; color: var(--adm-muted); margin-top: 2px; }
+.stat-sub { font-size: 0.75rem; color: var(--adm-muted); margin-top: 4px; }
+
+/* ── Popular Items ───────────────────────────────────────── */
+.popular-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid var(--adm-border);
+  font-size: 0.85rem;
+}
+.popular-id { font-family: monospace; }
+
+/* ── Tables ──────────────────────────────────────────────── */
+.table-dark { --bs-table-bg: transparent; --bs-table-color: var(--adm-text); }
+.table-dark td, .table-dark th { border-color: var(--adm-border); padding: 0.75rem 1.25rem; }
+.table-dark thead th { background: rgba(0,0,0,0.2); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--adm-muted); }
+.table-hover.table-dark tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+/* ── Form Controls ───────────────────────────────────────── */
+.form-control, .form-select {
+  background: var(--adm-surface);
+  border-color: var(--adm-border);
+  color: var(--adm-text);
+  font-size: 0.9rem;
+}
+.form-control:focus, .form-select:focus {
+  background: var(--adm-surface);
+  border-color: var(--adm-primary);
+  color: var(--adm-text);
+  box-shadow: 0 0 0 3px rgba(31,111,235,0.25);
+}
+.form-label { font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--adm-text); }
+.form-text { font-size: 0.78rem; color: var(--adm-muted); }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .admin-sidebar { transform: translateX(-100%); }
+  .admin-sidebar.show { transform: translateX(0); }
+  .admin-main { margin-left: 0; }
+}
