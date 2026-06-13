@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class AdminUserSeeder extends Seeder
 {
@@ -15,7 +14,7 @@ class AdminUserSeeder extends Seeder
             ['email' => 'admin@sportstream.com'],
             [
                 'name' => 'System Administrator',
-                'password' => Hash::make('Admin@12345'),
+                'password' => 'Admin@12345',
                 'is_admin' => true,
                 'is_active' => true,
                 'email_verified_at' => now(),
