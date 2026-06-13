@@ -15,7 +15,7 @@ class AdminUserSeeder extends Seeder
             ['email' => 'admin@sportstream.com'],
             [
                 'name' => 'System Administrator',
-                'password' => Hash::make('password'),
+                'password' => Hash::make('Admin@12345'),
                 'is_admin' => true,
                 'is_active' => true,
                 'email_verified_at' => now(),
