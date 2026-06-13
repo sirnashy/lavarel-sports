@@ -2,9 +2,8 @@ services:
   # Web Service
   - type: web
     name: sportstream-web
-    env: php
-    buildCommand: composer install --no-interaction --optimize-autoloader --no-dev && php artisan optimize
-    startCommand: apache2-foreground
+    env: docker
+    dockerfilePath: Dockerfile
     envVars:
       - key: APP_ENV
         value: production
@@ -14,7 +13,7 @@ services:
         value: stderr
       - key: DB_CONNECTION
         value: mysql
-      - key: CACHE_STORE
+      - key: CACHE_DRIVER
         value: redis
       - key: SESSION_DRIVER
         value: database
@@ -29,15 +28,15 @@ services:
   # Queue Background Worker
   - type: worker
     name: sportstream-queue
-    env: php
-    buildCommand: composer install --no-interaction --optimize-autoloader --no-dev
+    env: docker
+    dockerfilePath: Dockerfile
     startCommand: php artisan queue:work --verbose --tries=3 --timeout=90
     envVars:
       - key: APP_ENV
         value: production
       - key: DB_CONNECTION
         value: mysql
-      - key: CACHE_STORE
+      - key: CACHE_DRIVER
         value: redis
       - key: QUEUE_CONNECTION
         value: redis
