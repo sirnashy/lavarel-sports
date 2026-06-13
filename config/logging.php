@@ -118,6 +118,13 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'sportsrc' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/sportsrc.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,

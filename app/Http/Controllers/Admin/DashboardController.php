@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\Models\StreamView;
 use App\Models\Visitor;
-use App\Services\SportSRC\SportSRCClient;
+use App\Services\SportSrcService;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index(SportSRCClient $client)
+    public function index(SportSrcService $client)
     {
         $todayVisitors = Visitor::whereDate('created_at', today())->count();
         $weekVisitors = Visitor::where('created_at', '>=', now()->subDays(7))->count();

@@ -2,55 +2,57 @@
 
 namespace App\Services\SportSRC;
 
+use App\Services\SportSrcService;
+
 class LiveDataService
 {
     public function __construct(
-        private SportSRCClient $client
+        private SportSrcService $client
     ) {}
 
     public function getScores(string $matchId): array
     {
-        return $this->client->get('scores', ['match_id' => $matchId], cacheTtl: 15);
+        return $this->client->getScores($matchId);
     }
 
     public function getLineups(string $matchId): array
     {
-        return $this->client->get('lineups', ['match_id' => $matchId], cacheTtl: 60);
+        return $this->client->getLineups($matchId);
     }
 
     public function getStats(string $matchId): array
     {
-        return $this->client->get('stats', ['match_id' => $matchId], cacheTtl: 30);
+        return $this->client->getStats($matchId);
     }
 
     public function getIncidents(string $matchId): array
     {
-        return $this->client->get('incidents', ['match_id' => $matchId], cacheTtl: 20);
+        return $this->client->getIncidents($matchId);
     }
 
     public function getH2H(string $matchId): array
     {
-        return $this->client->get('h2h', ['match_id' => $matchId], cacheTtl: 3600);
+        return $this->client->getH2H($matchId);
     }
 
     public function getStandings(string $tournamentId): array
     {
-        return $this->client->get('standing', ['tournament_id' => $tournamentId], cacheTtl: 1800);
+        return $this->client->getStandings($tournamentId);
     }
 
     public function getGraph(string $matchId): array
     {
-        return $this->client->get('graph', ['match_id' => $matchId], cacheTtl: 30);
+        return $this->client->getGraph($matchId);
     }
 
     public function getHighlights(string $matchId): array
     {
-        return $this->client->get('highlights', ['match_id' => $matchId], cacheTtl: 300);
+        return $this->client->getHighlights($matchId);
     }
 
     public function getLastMatches(string $teamId, int $limit = 5): array
     {
-        return $this->client->get('last_matches', ['team_id' => $teamId, 'limit' => $limit], cacheTtl: 600);
+        return $this->client->getLastMatches($teamId, $limit);
     }
 
     public function getAllMatchData(string $matchId): array

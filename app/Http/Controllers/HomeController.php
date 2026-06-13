@@ -18,12 +18,13 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $sportId = $request->get('sport');
+        $sport = $request->get('sport');
 
-        $liveMatches = $this->matchService->getLiveMatches($sportId);
-        $upcomingMatches = $this->matchService->getUpcomingMatches($sportId, 12);
-        $finishedMatches = $this->matchService->getFinishedMatches($sportId, 12);
+        $liveMatches = $this->matchService->getLiveMatches($sport);
+        $upcomingMatches = $this->matchService->getUpcomingMatches($sport, 12);
+        $finishedMatches = $this->matchService->getFinishedMatches($sport, 12);
         $sports = $this->sportService->getAllSports();
+        $sportId = $sport;
 
         $featuredMatches = FeaturedMatch::active()
             ->with('creator')

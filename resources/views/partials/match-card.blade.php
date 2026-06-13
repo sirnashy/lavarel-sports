@@ -7,7 +7,9 @@
     $matchId = $match['id'] ?? $match['match_id'] ?? '';
     $startTime = $match['start_time'] ?? $match['kickoff'] ?? null;
 @endphp
-<a href="{{ route('match.detail', $matchId) }}" class="match-card-link">
+@if(!empty($matchId))
+<a href="{{ route('match.detail', ['matchId' => $matchId]) }}" class="match-card-link">
+@endif
     <div class="match-card {{ $isLive ? 'match-card--live' : '' }}">
         {{-- Competition Header --}}
         <div class="match-card__competition">
@@ -74,4 +76,6 @@
             </span>
         </div>
     </div>
+@if(!empty($matchId))
 </a>
+@endif

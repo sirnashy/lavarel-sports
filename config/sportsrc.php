@@ -8,18 +8,20 @@ return [
     'retry_delay' => env('SPORTSRC_RETRY_DELAY', 1000), // ms
 
     'cache_ttl' => [
+        'account' => 300,
         'live' => 30,
-        'scores' => 15,
-        'incidents' => 20,
-        'stats' => 30,
-        'matches' => 120,
-        'detail' => 30,
-        'lineups' => 60,
+        'sports' => 86400,
+        'matches' => 300,
+        'detail' => 120,
+        'scores' => 300,
+        'lineups' => 3600,
+        'stats' => 1800,
+        'incidents' => 1200,
         'h2h' => 3600,
         'standings' => 1800,
         'highlights' => 300,
         'last_matches' => 600,
-        'sports' => 3600,
+        'graph' => 300,
     ],
 
     'rate_limit' => [

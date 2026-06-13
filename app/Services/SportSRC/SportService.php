@@ -2,15 +2,17 @@
 
 namespace App\Services\SportSRC;
 
+use App\Services\SportSrcService;
+
 class SportService
 {
     public function __construct(
-        private SportSRCClient $client
+        private SportSrcService $client
     ) {}
 
     public function getAllSports(): array
     {
-        return $this->client->get('sports', [], cacheTtl: 3600);
+        return $this->client->getSports();
     }
 
     public function getSportById(int $id): array

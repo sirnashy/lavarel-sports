@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin.auth'])->group(function () {
 
     Route::get('/', [Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('api-debug', [Admin\ApiDebugController::class, 'index'])->name('api-debug');
 
     // Featured Matches
     Route::resource('featured', Admin\FeaturedMatchController::class)->parameters(['featured' => 'featured']);
